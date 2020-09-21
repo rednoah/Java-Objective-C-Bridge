@@ -18,23 +18,6 @@
 			<properties>
 				<xcodeScheme>Release</xcodeScheme>
 			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-					</plugin>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 	</profiles>
 
@@ -205,130 +188,15 @@
 					</archive>
 				</configuration>
 			</plugin>
-
-			<!-- CODE ANALYSIS -->
-			<plugin>
-				<groupId>com.github.spotbugs</groupId>
-				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>3.1.12.2</version>
-				<configuration>
-					<effort>more</effort>
-					<jvmArgs>--add-opens java.base/java.lang=ALL-UNNAMED
-						--illegal-access=deny</jvmArgs>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.spotbugs</groupId>
-						<artifactId>spotbugs</artifactId>
-						<version>4.0.0-beta4</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<!-- Ensures that spotbugs inspects source code when project is deployed. -->
-<!-- 					<execution> -->
-<!-- 						<id>analyze-deploy</id> -->
-<!-- 						<phase>deploy</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>check</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-				</executions>
-			</plugin>
-
-			<!-- deployment -->
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.8</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
 		</plugins>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>3.1.0</version>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.1.1</version>
-					<configuration>
-						<failOnError>false</failOnError>
-						<!-- <additionalparam>-Xdoclint:none</additionalparam> -->
-						<additionalOptions>--allow-script-in-comments </additionalOptions>
-						<useStandardDocletOptions>false</useStandardDocletOptions>
-
-						<quiet>true</quiet>
-						<!-- does not work with revision property! -->
-						<ignoreClirr>true</ignoreClirr>
-
-						<detectLinks>false</detectLinks>
-						<detectOfflineLinks>false</detectOfflineLinks>
-						<doclint>all,-html,-syntax</doclint>
-						<version>false</version>
-						<nosince>true</nosince>
-						<author>false</author>
-						<defaultAuthor>mojo2012</defaultAuthor>
-						<defaultVersion>1.0</defaultVersion>
-						<level>public</level>
-					</configuration>
-					<executions>
-						<execution>
-							<id>attach-javadocs</id>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>1.6</version>
-					<configuration>
-						<!-- This is necessary for gpg to not try to use the pinentry programs -->
-						<gpgArguments>
-							<arg>--pinentry-mode</arg>
-							<arg>loopback</arg>
-						</gpgArguments>
-					</configuration>
-					<executions>
-						<execution>
-							<id>sign-artifacts</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>sign</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
-			<version>5.4.0</version>
+			<version>5.6.0</version>
 		</dependency>
 
 		<dependency>
