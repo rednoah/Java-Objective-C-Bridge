@@ -123,21 +123,15 @@ static JavaVM *jvm = NULL;
 
 -(void)forwardInvocation:(NSInvocation *)invocation
 {
-    NSLog(@"forwardInvocation: %@", invocation);
-    
     JNIEnv *env=0;
     SEL aSelector = [invocation selector];
     int attach = (*jvm)->AttachCurrentThread(jvm, (void**)&env, NULL);
     
     @try {
         if ( attach == 0 ) {
-            NSLog(@"Before CallBooleanMethod");
-            
             //JNF_COCOA_ENTER(env);
             (*env)->CallVoidMethod(env, peer, jForwardInvocation, invocation);
             //JNF_COCOA_EXIT(env);
-            
-            NSLog(@"After CallBooleanMethod");
         }
         //(*jvm)->DetachCurrentThread(jvm);
     } @catch (NSException *e) {
@@ -194,7 +188,6 @@ static JavaVM *jvm = NULL;
 }
 
 + (NSSet<NSString *> *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSLog(@"Calling keyPathsForValuesAffectingValueForKey: %@", key);
     return [super keyPathsForValuesAffectingValueForKey: key];
 }
 
@@ -210,7 +203,6 @@ static JavaVM *jvm = NULL;
 
 - (void)doesNotRecognizeSelector:(SEL)aSelector {
     NSString* message = [NSString stringWithFormat:@"Unrecognized selector called: %@", NSStringFromSelector(aSelector)];
-    NSLog(@"%@", message);
     JNIEnv *env=0;
     (*jvm)->AttachCurrentThread(jvm, (void**)&env, NULL);
     [JavaUtil throwJavaException: env withMessage: [message UTF8String] ];
@@ -223,7 +215,6 @@ static JavaVM *jvm = NULL;
 - (id)forwardInvocationForSelector: (SEL)aSelector withTarget: (id _Nullable)aTarget withArguments: (NSArray*)args {
     @try {
         NSString* sel = NSStringFromSelector(aSelector);
-        NSLog(@"Forwarding selector: %@, %@", sel, args);
         
         NSMethodSignature *aSignature = [self methodSignatureForSelector:aSelector];
         NSInvocation *anInvocation = [NSInvocation invocationWithMethodSignature:aSignature];
@@ -231,20 +222,16 @@ static JavaVM *jvm = NULL;
         [anInvocation setTarget:aTarget];
         [anInvocation setSelector:aSelector];
         
-        NSLog(@"Settings arguments for selector: %@", sel);
         int i = 2;
         for (__unsafe_unretained id arg in args) {
-            NSLog(@"Settings argument %d to: %@", i, arg);
             [anInvocation setArgument:&arg atIndex:i];
             i++;
         }
 
         [anInvocation retainArguments];
         
-        NSLog(@"Forwarding selector to java object: %@", sel);
         [self forwardInvocation:anInvocation];
 
-        NSLog(@"Getting return value for selector: %@", sel);
         NSUInteger length = [[anInvocation methodSignature] methodReturnLength];
         
         if (length > 0 ) {
