@@ -471,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -481,8 +482,8 @@
 				GCC_PREFIX_HEADER = "src/main/objectivec/libjcocoa-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "/Library/Java/JavaVirtualMachines/1.7.0u.jdk/Contents/Home/include/**";
 				INFOPLIST_FILE = "$(SRCROOT)/src/main/resources/Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = net.java.openjdk.11.0.2.jdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.github.java-objc-bridge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -491,6 +492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -500,8 +502,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "src/main/objectivec/libjcocoa-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/src/main/resources/Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = net.java.openjdk.11.0.2.jdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.github.java-objc-bridge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
