@@ -1,7 +1,6 @@
 package ca.weblite.objc;
 
 
-import ca.weblite.nativeutils.NativeUtils;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 import com.sun.jna.Union;
@@ -58,12 +57,11 @@ public class RuntimeUtils {
     public static boolean loaded = false;
     static {
         try {
-            //System.loadLibrary("jcocoa");
-            NativeUtils.loadLibraryFromJar("/libjcocoa.dylib");
+            System.loadLibrary("jcocoa");
             loaded = true;
         } catch (UnsatisfiedLinkError err){
             err.printStackTrace(System.err);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace(System.err);
         }
         init();
