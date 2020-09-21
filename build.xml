@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project name="java-objc-bridge" default="jar">
+
+	<target name="jar">
+		<copy todir="dist" flatten="true">
+			<fileset dir="target">
+				<include name="**/native/*.dylib" />
+			</fileset>
+		</copy>
+
+		<jar destfile="dist/java-objc-bridge.jar">
+			<zipfileset src="target/java-objc-bridge-1.1-SNAPSHOT.jar">
+				<include name="**/*.class" />
+			</zipfileset>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="dist" />
+	</target>
+
+</project>
