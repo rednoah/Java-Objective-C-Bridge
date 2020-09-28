@@ -14,7 +14,6 @@ public class ScalarMapping implements TypeMapping {
     /** {@inheritDoc} */
     @Override
     public Object cToJ(Object cVar, String signature, TypeMapping root) {
-        //System.out.println("C to J for signature "+signature);
         char firstChar = signature.charAt(0);
         if ( Long.class.isInstance(cVar) || long.class.isInstance(cVar)){
             long cObj = (Long)cVar;

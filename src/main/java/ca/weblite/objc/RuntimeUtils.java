@@ -894,7 +894,6 @@ public class RuntimeUtils {
                 return null;
             case '^':
             default:
-                ////System.out.println("Outputting pointer by reference for value "+val+" and signature "+signature);
                 if ( val == null ){
                     try {
                         throw new RuntimeException("Checking stack trace for val "+val+" and signature "+signature);

@@ -390,7 +390,6 @@ public class NSObject extends Proxy implements PeerableRecipient {
                     // If we don't know how to handle the return type properly, 
                     // then let's just give up and pass it to the parent object
                     // the normal way
-                    //System.out.println("We give up... passing "+sel(selector)+" to parent");
                     msg(invocation, "invokeWithTarget:", parent);
                     return;
                     

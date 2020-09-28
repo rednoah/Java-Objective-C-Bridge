@@ -279,7 +279,6 @@ public class Client {
      * @return A pointer result from the message invocation.
      */
     public Pointer sendPointer(Pointer receiver, Pointer selector, Object... args){
-        //System.out.println("In sendPointer for "+selName(selector));
         Object res = send(receiver, selector, args);
         if ( Pointer.class.isInstance(res)){
             return (Pointer)res;

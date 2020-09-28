@@ -501,14 +501,11 @@ public class Proxy implements Peerable {
      */
     @Override
     public String toString(){
-        System.out.println("The peer is "+getPeer());
         if ( getPeer() == null ){
             return "null";
         }
         Pointer res =  Client.getRawClient().sendPointer(getPeer(), "description");
-        //System.out.println("About to send UTF8String msg");
         Pointer str = Client.getRawClient().sendPointer(res, "UTF8String");
-        //System.out.println("Sent UTF8String msg");
         return str.getString(0);
         
     }

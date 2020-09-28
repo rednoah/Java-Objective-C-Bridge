@@ -26,7 +26,6 @@ public class NSObjectMapping implements TypeMapping{
     /** {@inheritDoc} */
     @Override
     public Object cToJ(Object cVar, String signature, TypeMapping root) {
-        //System.out.println("Mapping NSObject to Java "+cVar+" sig: "+signature);
         Pointer cObj = Pointer.NULL;
         if ( Pointer.class.isInstance(cVar) ){
             cObj = (Pointer)cVar;
@@ -36,7 +35,6 @@ public class NSObjectMapping implements TypeMapping{
             return cVar;
         }
         if ( (Pointer.NULL == cObj) || (cVar == null) || (cObj == null) || (PointerTool.getPeer(cObj) == 0L ) ){
-            //System.out.println("The java value will be null");
             return null;
         }
         String clsName = Runtime.INSTANCE.object_getClassName(cObj);
@@ -46,7 +44,6 @@ public class NSObjectMapping implements TypeMapping{
         }
         
         
-        ////System.out.println("Checking if object is a string "+isString+", "+clsName);
         if ( isString  ){
             return RuntimeUtils.str(cObj);
         }
@@ -68,7 +65,6 @@ public class NSObjectMapping implements TypeMapping{
             return Pointer.NULL;
         }
         if ( String.class.isInstance(jVar)){
-            //////System.out.println("Converting string ["+jVar+"] to string");
             return RuntimeUtils.str((String)jVar);
         }
         if ( Peerable.class.isInstance(jVar)){
